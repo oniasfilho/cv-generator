@@ -1,38 +1,73 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Muli&display=swap');
+
+* {
+  box-sizing: border-box;
+  font-family: sans-serif;
+  font-family: 'Muli', 'sans-serif';
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.page-wrapper {
+  display: grid;
+  height: 120vh;
+  grid-template-columns: 0.6fr 1fr;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.left-section {
+  display: grid;
+  background-color: black;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.right-section {
+  display: grid;
+  grid-template-rows: repeat(4, auto);
+  /* grid-template-rows: repeat(4, 1fr); */
+  /* background-color: rgb(249, 237, 237); */
+  padding: 100px 50px 100px 100px;
 }
 
-.App-link {
-  color: #61dafb;
+.section-title {
+  text-transform: uppercase;
+  font-weight: bold;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.section-text {
+  text-align: justify;
+}
+
+.about-me {
+  display: grid;
+  /* background: red; */
+  grid-template-rows: 0.2fr auto;
+}
+
+.education {
+  /* background: rgb(205, 198, 148); */
+}
+
+.experience {
+  /* background: rgb(148, 157, 205); */
+}
+
+.certificates {
+  /* background: rgb(205, 148, 197); */
+}
+
+.experience-wrapper {
+  display: grid;
+  grid-template-columns: 0.2fr 1fr;
+  align-items: baseline;
+  gap:0px;
+}
+
+.company-name{
+  /* margin:0px; */
+  font-weight: bold;
+}
+
+.year-wrapper{
+  font-weight: bold;
+}
+
+.certificate-name {
+  font-weight: bold;
 }
