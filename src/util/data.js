@@ -17,7 +17,7 @@ const personalInfo = {
         },
     ],
     contactInfo: {
-        phoneNumbers: ["+55 65 98152 2040", "+55 65 3631 1010"],
+        phoneNumbers: ["+55 65 98152 2040", "+55 65 3631"],
         email: "onias.filho@gmail.com"
     }
 }
