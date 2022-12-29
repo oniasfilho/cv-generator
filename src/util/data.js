@@ -1,8 +1,32 @@
+const personalInfo = {
+    firstName: "Onias",
+    lastName: "da Rocha",
+    currentJob: "Software Engineer",
+    hardSkills: ["Object Oriented Programming","Java","Javascript", "SQL", "Spring Framework", "React", "Node", "TDD", "JUnit", "Docker"],
+    softSkills: ["Communicative", "Detail Oriented", "Creative","Motivated", "Dynamic", "Collaborative","Team Player"],
+    socialLinks: [
+        {
+            "website": "github",
+            "handle": "/oniasfilho",
+            "url": "http://www.github.com/oniasfilho"
+        },
+        {
+            "website": "linkedin",
+            "handle": "/oniasfilho",
+            "url": "http://www.linkedin.com/in/oniasfilho"
+        },
+    ],
+    contactInfo: {
+        phoneNumbers: ["+55 65 98152 2040", "+55 65 3631 1010"],
+        email: "onias.filho@gmail.com"
+    }
+}
+
 const experiences = [
     {
         "timeFrame": "2021",
         "companyName": "Mercado Livre",
-        "jobTitle": "back-end engineer (junior)",
+        "jobTitle": "Back-end Engineer (Junior)",
         "jobDescription": "API development and maintenance using Spring Boot/ Spring Framework. Multi-source applications, working with Data Lake (Alation) and SQLServer. Assist with architectural design on event driven models",
     },
     {
@@ -37,4 +61,4 @@ const certificates = [
     },
 ]
 
-export {experiences, certificates};
+export {experiences, certificates, personalInfo};
