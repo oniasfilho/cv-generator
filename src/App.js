@@ -1,28 +1,61 @@
 import './App.css';
 import { experiences, certificates, personalInfo } from './util/data';
+import {useState, useEffect} from 'react';
+
+import axios from 'axios';
+
 
 const App = () => {
+  
+  const [CV, setCV] = useState({
+    personalInfo: {
+        "firstName": "",
+        "lastName": "",
+        "currentJob": "",
+        "hardSkills": [],
+        "softSkills": [],
+        "socialLinks": [],
+        "contactInfo": {
+            "phoneNumbers": [],
+            "email": ""
+        }
+    },
+    experiences: [],
+    certificates: []
+});
 
-  const handleLinkClick = (social) => {
-    window.open(social.url, '_blank', 'noreferrer');
+  const requestCV = async() => {
+    try {
+      const resp = await axios.get("https://cv-generator-api.herokuapp.com/cv");
+      setCV(resp.data)
+    } catch (error) {
+      console.error(error)
+    }
   }
+
+  useEffect(() => {
+    requestCV();
+  }, [] )
+
+ 
   return (
     <div className="page-wrapper">
       <div className="cv-wrapper">
       <div className="left-section">
         <div className="picture-wrapper empty-section">
           <div className="picture-section">
-            {personalInfo.firstName} <br/>
-            {personalInfo.lastName}
+            {/* TODO: Fetch picture from back-end */}
+            {CV.personalInfo.firstName} <br/>
+            {CV.personalInfo.lastName}
           </div>
           <div className="job-title-section">
-            {personalInfo.currentJob}
+            {CV.personalInfo.currentJob}
           </div>
         </div>
         <div className="hard-skills-wrapper empty-section">
-          <p className="hard-skills-title"><h3>Hard Skills</h3></p>
+          <p className="hard-skills-title">Hard Skills</p>
           <p className="hard-skills-content">
-            {personalInfo.hardSkills.map((skill, index) => {
+            {CV.personalInfo.hardSkills.map((skill, index) => {
               return <>{ index !== 0
                 ? `| ${skill}` 
                 : skill} </>
@@ -30,9 +63,9 @@ const App = () => {
           </p>
         </div>
         <div className="soft-skills-wrapper empty-section">
-          <p className="soft-skills-title"><h3>Soft Skills</h3></p>
+          <p className="soft-skills-title">Soft Skills</p>
           <p className="soft-skills-content">
-            {personalInfo.softSkills.map((skill, index) => {
+            {CV.personalInfo.softSkills.map((skill, index) => {
               return <>{ index !== 0 
                 ? `| ${skill}` 
                 : skill} </>
@@ -40,15 +73,13 @@ const App = () => {
           </p>
         </div>
         <div className="social-links-wrapper empty-section">
-          {personalInfo.socialLinks.map(social => {
+          {CV.personalInfo.socialLinks.map((social, index) => {
             return (
-              <div className="single-social-wrapper" onClick={() => {
-                handleLinkClick(social)
-              }}>
+              <div key={index} className="single-social-wrapper">
                 <div className="icon-wrapper">
                   {social.website === "github"
-                    ?<i class="fa-brands fa-github fa-2xl"></i>
-                    :<i class="fa-brands fa-linkedin fa-2xl" style={{"--fa-primary-color": "white"}}></i>
+                    ?<i className="fa-brands fa-github fa-2xl"></i>
+                    :<i className="fa-brands fa-linkedin fa-2xl" style={{"--fa-primary-color": "white"}}></i>
                   }
                 </div>
                 <p className="handler-wrapper">{social.handle}</p>
@@ -59,37 +90,36 @@ const App = () => {
         <div className="contact-wrapper empty-section">
           <h3 className="contact-section-title">Contact</h3>
           <div className="contact-info">
-            {personalInfo.contactInfo.phoneNumbers.map(number => {
+            {CV.personalInfo.contactInfo.phoneNumbers.map(number => {
               return (
                 <>
                 {number} <br/>
                 </>
               )
             })}
-            {personalInfo.contactInfo.email}
+            {CV.personalInfo.contactInfo.email}
           </div>
         </div>
       </div>
       <div className="right-section">
         <div className="about-me">
-          <h2 className='section-title'>about me</h2>
+          <h2 className='section-title'>about me </h2>
           <p className="section-text">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque est ante, egestas dapibus vulputate sit amet, venenatis at nulla. Aenean condimentum nunc metus, ac sagittis justo eleifend non. Nulla in ullamcorper ante. Nam consectetur metus at faucibus tincidunt. In in eleifend risus, nec suscipit lorem. 
-            Aenean varius aliquam nibh maximus convallis. In egestas arcu diam, at suscipit nibh pulvinar ac. Cras vel nisl eu leo vestibulum dignissim. Sed ut tempus nisi. Mauris libero ipsum, luctus sit amet elit vel, scelerisque euismod libero. Ut iaculis ligula eget pretium molestie. Aliquam rutrum ipsum in enim dignissim, ac luctus ex tempor.
+          TODO: Fetch this data from back-end
           </p>
         </div>
         <div className="education">
         <h2 className='section-title'>education</h2>
-        <h4 className='subtitle'>Federal University of Mato Grosso (UFMT)</h4>
+        <h4 className='subtitle'>TODO: Fetch this data from back-end</h4>
           <p className="section-text">
-          2017 - Current | Computer Information Systems
+          TODO: Fetch this data from back-end
           </p>
         </div>
         <div className="experience">
         <h2 className='section-title'>experience</h2>
-          {experiences.map(experiencia => (
+          {CV.experiences.map((experiencia, index) => (
             <>
-              <div className="experience-wrapper">
+              <div key={index} className="experience-wrapper">
                 <div className="year-wrapper">
                   {experiencia.timeFrame}
                 </div>
@@ -110,8 +140,8 @@ const App = () => {
         </div>
         <div className="certificates">
           <h2 className='section-title'>certificates</h2>
-          {certificates.map(certificado => (
-            <div className="certificate-wrapper">
+          {CV.certificates.map((certificado, index) => (
+            <div key={index} className="certificate-wrapper">
             <p className="certificate-name">{certificado.name}</p>
             <div className="certificate-info">
               {certificado.timeFrame} - {certificado.info}
